@@ -2,11 +2,12 @@ package io.zipcoder.interfaces;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
-public class People {
+public class People implements Iterable<Person>{
 
-    List<Person> people;
+    private List<Person> people;
 
     public People(){
         people = new ArrayList<Person>();
@@ -58,5 +59,27 @@ public class People {
         return false;
     }
 
+    public Boolean removeAll(){
+        return people.removeAll(people);
+    }
 
+    public Boolean isEmpty(){
+        return people.isEmpty();
+    }
+
+    public Integer count(){
+        return people.size();
+    }
+
+    public Person[] toArray(){
+        Person[] retArray = new Person[count()];
+        for (int i = 0; i < count(); i++) {
+            retArray[i] = people.get(i);
+        }
+        return retArray;
+    }
+
+    public Iterator<Person> iterator() {
+        return people.iterator();
+    }
 }

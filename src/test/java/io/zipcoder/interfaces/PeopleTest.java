@@ -3,6 +3,8 @@ package io.zipcoder.interfaces;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.logging.Logger;
+
 import static org.junit.Assert.*;
 
 public class PeopleTest {
@@ -12,6 +14,9 @@ public class PeopleTest {
     Person testPerson;
     String expectedName;
     People test;
+
+    private static final Logger LOGGER =
+            Logger.getLogger((PeopleTest.class.getName()));
 
     @Before
     public void init(){
@@ -84,5 +89,52 @@ public class PeopleTest {
         test.add(testPerson);
 
         assertFalse(test.remove(1l));
+    }
+
+    @Test
+    public void removeAllAndIsEmptyTest(){
+        test.add(testStudent);
+        test.add(testPerson);
+        test.add(testInstructor);
+
+        test.removeAll();
+
+        assertTrue(test.isEmpty());
+
+        assertFalse(test.contains(testStudent));
+    }
+
+    @Test
+    public void countTest(){
+        test.add(testStudent);
+        test.add(testPerson);
+        test.add(testInstructor);
+
+        test.removeAll();
+        Integer expected = 0;
+        assertEquals(expected, test.count());
+    }
+
+    @Test
+    public void countTest2(){
+        test.add(testStudent);
+        test.add(testPerson);
+        test.add(testInstructor);
+
+        Integer expected = 3;
+        assertEquals(expected, test.count());
+    }
+
+    @Test
+    public void toArrayTest(){
+        test.add(testStudent);
+        test.add(testPerson);
+        test.add(testInstructor);
+        Person[] expected = new Person[]{testStudent, testPerson, testInstructor};
+        Person[] actual = test.toArray();
+
+        for (int i = 0; i < test.count(); i++) {
+            assertEquals(expected[i], actual[i]);
+        }
     }
 }
